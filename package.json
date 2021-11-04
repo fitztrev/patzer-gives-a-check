@@ -2,6 +2,8 @@
   "name": "how-many-checks",
   "private": true,
   "scripts": {
+    "start": "parcel index.html --open",
+    "prebuild": "rm -rf dist",
     "build": "parcel build index.html --public-url './'"
   },
   "dependencies": {

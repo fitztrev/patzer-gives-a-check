@@ -8,7 +8,7 @@ https://fitztrev.github.io/how-many-checks
 git clone git@github.com:fitztrev/how-many-checks.git
 cd how-many-checks
 npm install
-npx parcel index.html --open
+npm run start
 ```
 
 ## Deploy to Github Pages

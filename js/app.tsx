@@ -90,7 +90,7 @@ new Vue({
                             }
 
                             if (! check) {
-                                this.wrongAnswerProvided()
+                                this.resetUserScore()
                             }
 
                             this.setupChessground()
@@ -104,17 +104,8 @@ new Vue({
             if (this.userFoundChecks.length === this.validChecks.length) {
                 this.loadNewPuzzle()
             } else {
-                this.wrongAnswerProvided()
+                this.resetUserScore()
             }
-        },
-
-        wrongAnswerProvided: function() {
-            this.resetUserScore()
-
-            this.wrongAnswer = true
-            setTimeout(function(){
-                this.wrongAnswer = false
-            }.bind(this), 1000)
         },
 
         revealAnswers: function() {
@@ -124,7 +115,12 @@ new Vue({
         },
 
         resetUserScore: function() {
-            this.userScore = 0
+            this.wrongAnswer = true
+            setTimeout(function(){
+                this.wrongAnswer = false
+
+                this.userScore = 0
+            }.bind(this), 1000)
         },
     },
 })
