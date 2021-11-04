@@ -35,7 +35,12 @@
                             <h5 class="card-title">Answers:</h5>
                             <p class="card-text">
                                 <ol>
-                                    <li v-for="check in validChecks">
+                                    <li v-for="check in validChecks"
+                                        :class="{
+                                            'text-success': userFoundChecks.includes(check),
+                                            'text-danger fw-bold': !userFoundChecks.includes(check),
+                                        }"
+                                    >
                                         {{ check.san }}
                                     </li>
                                 </ol>
