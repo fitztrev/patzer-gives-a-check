@@ -1,7 +1,11 @@
 {
   "name": "how-many-checks",
   "private": true,
+  "scripts": {
+    "build": "parcel build index.html --public-url './'"
+  },
   "dependencies": {
+    "animate.css": "^4.1.1",
     "bootstrap": "^5.1.3",
     "chess.js": "^0.12.0",
     "chessground": "^8.1.7",

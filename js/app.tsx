@@ -19,6 +19,9 @@ new Vue({
             fen: null,
         },
         userFoundChecks: [],
+        userScore: 0,
+
+        wrongAnswer: false,
         showAnswers: false,
     },
 
@@ -80,8 +83,14 @@ new Vue({
                     events: {
                         after: function(from, to) {
                             let check = _.find(this.validChecks, {from, to})
-                            if (check) {
+
+                            if (check && ! _.includes(this.userFoundChecks, check)) {
+                                this.userScore++
                                 this.userFoundChecks = _.union(this.userFoundChecks, [check])
+                            }
+
+                            if (! check) {
+                                this.wrongAnswerProvided()
                             }
 
                             this.setupChessground()
@@ -89,6 +98,33 @@ new Vue({
                     },
                 },
             })
-        }
+        },
+
+        checkAnswers: function() {
+            if (this.userFoundChecks.length === this.validChecks.length) {
+                this.loadNewPuzzle()
+            } else {
+                this.wrongAnswerProvided()
+            }
+        },
+
+        wrongAnswerProvided: function() {
+            this.resetUserScore()
+
+            this.wrongAnswer = true
+            setTimeout(function(){
+                this.wrongAnswer = false
+            }.bind(this), 1000)
+        },
+
+        revealAnswers: function() {
+            this.resetUserScore()
+
+            this.showAnswers = ! this.showAnswers
+        },
+
+        resetUserScore: function() {
+            this.userScore = 0
+        },
     },
 })

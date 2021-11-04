@@ -43,13 +43,17 @@
                         </div>
                     </div>
 
-                    <template v-if="userFoundChecks.length === validChecks.length">
-                        <div class="alert alert-success" role="alert">
-                            Done!
-                        </div>
+                    <button type="button" class="btn btn-primary" @click="checkAnswers">Done</button>
 
-                        <button type="button" class="btn btn-primary" @click="loadNewPuzzle">Next &rarr;</button>
-                    </template>
+                    <hr>
+
+                    <div class="scorecard card text-dark bg-light mb-4"
+                        :class="{
+                            'animate__animated animate__shakeX': wrongAnswer,
+                        }"
+                    >
+                        <div class="card-body">&star; {{ userScore }}</div>
+                    </div>
                 </template>
             </div>
         </div>
@@ -59,9 +63,7 @@
         <p class="text-center text-small">
             From puzzle <a :href="'https://lichess.org/training/' +  puzzle.id">#{{ puzzle.id }}</a>
             &bullet;
-            <a href="#" @click.prevent="loadNewPuzzle">Skip</a>
-            &bullet;
-            <a href="#" @click.prevent="showAnswers = ! showAnswers">View answers</a>
+            <a href="#" @click.prevent="revealAnswers">View answers</a>
         </p>
     </div>
     <script type="module" src="js/app.tsx"></script>
