@@ -1,0 +1,15 @@
+{
+  "name": "how-many-checks",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "^5.1.3",
+    "chess.js": "^0.12.0",
+    "chessground": "^8.1.7",
+    "lodash": "^4.17.21",
+    "vue": "^2.6.14"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.0.0",
+    "parcel": "^2.0.0"
+  }
+}
