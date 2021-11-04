@@ -43,17 +43,19 @@
                         </div>
                     </div>
 
-                    <button type="button" class="btn btn-primary" @click="checkAnswers">Done</button>
+                    <button v-if="! streakIsOver" type="button" class="btn btn-primary" @click="checkAnswers">Done</button>
 
                     <hr>
 
                     <div class="scorecard card text-dark bg-light mb-4"
                         :class="{
-                            'animate__animated animate__shakeX': wrongAnswer,
+                            'animate__animated animate__shakeX': streakIsOver,
                         }"
                     >
-                        <div class="card-body">&star; {{ userScore }}</div>
+                        <div class="card-body">&star; {{ streakScore }}</div>
                     </div>
+
+                    <button v-if="streakIsOver" type="button" class="btn btn-success" @click="newStreak">New Streak</button>
                 </template>
             </div>
         </div>
@@ -61,7 +63,7 @@
         <hr>
 
         <p class="text-center text-small">
-            From puzzle <a :href="'https://lichess.org/training/' +  puzzle.id">#{{ puzzle.id }}</a>
+            From puzzle <a target="_blank" :href="'https://lichess.org/training/' +  puzzle.id">#{{ puzzle.id }}</a>
             &bullet;
             <a href="#" @click.prevent="revealAnswers">View answers</a>
         </p>

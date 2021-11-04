@@ -19,10 +19,11 @@ new Vue({
             fen: null,
         },
         userFoundChecks: [],
-        userScore: 0,
 
-        wrongAnswer: false,
         showAnswers: false,
+
+        streakScore: 0,
+        streakIsOver: false,
     },
 
     computed: {
@@ -38,7 +39,7 @@ new Vue({
     mounted: function(){
         this.chessgroundInstance = Chessground(document.getElementById('chessground'))
 
-        this.loadNewPuzzle()
+        this.newStreak()
     },
 
     methods: {
@@ -85,12 +86,12 @@ new Vue({
                             let check = _.find(this.validChecks, {from, to})
 
                             if (check && ! _.includes(this.userFoundChecks, check)) {
-                                this.userScore++
+                                this.streakScore++
                                 this.userFoundChecks = _.union(this.userFoundChecks, [check])
                             }
 
                             if (! check) {
-                                this.resetUserScore()
+                                this.endStreak()
                             }
 
                             this.setupChessground()
@@ -104,23 +105,24 @@ new Vue({
             if (this.userFoundChecks.length === this.validChecks.length) {
                 this.loadNewPuzzle()
             } else {
-                this.resetUserScore()
+                this.endStreak()
             }
         },
 
         revealAnswers: function() {
-            this.resetUserScore()
+            this.endStreak()
 
             this.showAnswers = ! this.showAnswers
         },
 
-        resetUserScore: function() {
-            this.wrongAnswer = true
-            setTimeout(function(){
-                this.wrongAnswer = false
+        newStreak: function() {
+            this.streakScore = 0
+            this.streakIsOver = false
+            this.loadNewPuzzle()
+        },
 
-                this.userScore = 0
-            }.bind(this), 1000)
+        endStreak: function() {
+            this.streakIsOver = true
         },
     },
 })
