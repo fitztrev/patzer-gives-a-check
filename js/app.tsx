@@ -14,10 +14,7 @@ new Vue({
     data: {
         chessgroundInstance: null,
         chessJsInstance: null,
-        puzzle: {
-            id: null,
-            fen: null,
-        },
+        puzzleId: null,
         userFoundChecks: [],
 
         showAnswers: false,
@@ -46,10 +43,12 @@ new Vue({
         loadNewPuzzle: function() {
             let puzzle = _.sample(puzzles).split(',')
 
-            this.puzzle.id = puzzle[0]
-            this.puzzle.fen = puzzle[1]
+            this.puzzleId = puzzle[0]
 
-            this.chessJsInstance = new ChessJS(this.puzzle.fen)
+            this.chessJsInstance = new ChessJS(puzzle[1])
+
+            // The Lichess puzzle starts after the first move, so play the first move
+            this.chessJsInstance.move(puzzle[2].split(' ')[0], { sloppy: true })
 
             // If this puzzle has no checks, skip it
             if (_.isEmpty(this.validChecks)) {
@@ -75,7 +74,7 @@ new Vue({
             })
 
             this.chessgroundInstance.set({
-                fen: this.puzzle.fen,
+                fen: this.chessJsInstance.fen(),
                 orientation: this.toMove,
                 lastMove: [],
                 movable: {

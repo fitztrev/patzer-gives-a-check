@@ -1,5 +1,5 @@
 {
-  "name": "how-many-checks",
+  "name": "patzer-gives-a-check",
   "private": true,
   "scripts": {
     "start": "parcel index.html --open",

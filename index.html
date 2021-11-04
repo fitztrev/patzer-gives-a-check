@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles/style.scss" />
-    <title>How Many Checks?</title>
+    <title>Patzer Gives a Check</title>
 </head>
 <body>
     <div id="app" class="container">
-        <h1>How Many Checks?</h1>
-        <p>It's important to look at <em>checks</em>, <em>captures</em>, and <em>threats</em>, in that order. This is designed to help train you to look at <strong>all</strong> checks.</p>
+        <h1>Patzer Gives a Check</h1>
+        <p>It's important to look at <em>checks</em>, <em>captures</em>, and <em>threats</em>, in that order.</p>
 
         <div class="row">
             <div class="col">
@@ -31,8 +31,8 @@
                     </ol>
 
                     <div class="card text-dark bg-light mb-4" v-if="showAnswers">
+                        <div class="card-header">Answers</div>
                         <div class="card-body">
-                            <h5 class="card-title">Answers:</h5>
                             <p class="card-text">
                                 <ol>
                                     <li v-for="check in validChecks"
@@ -68,7 +68,7 @@
         <hr>
 
         <p class="text-center text-small">
-            From puzzle <a target="_blank" :href="'https://lichess.org/training/' +  puzzle.id">#{{ puzzle.id }}</a>
+            From puzzle <a target="_blank" :href="'https://lichess.org/training/' +  puzzleId">#{{ puzzleId }}</a>
             &bullet;
             <a href="#" @click.prevent="revealAnswers">View answers</a>
         </p>
