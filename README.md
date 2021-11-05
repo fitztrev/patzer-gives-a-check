@@ -20,6 +20,8 @@ git subtree push --prefix dist origin gh-pages
 
 ## To-Do
 
+1. Include no-check puzzles. If user correctly presses "Done", give them a point.
+
 1. BUG: Implement pawn promotion dialog
     For example, when a pawn promotes and either a queen or rook can check:
     ```

@@ -17,8 +17,6 @@ new Vue({
         puzzleId: null,
         userFoundChecks: [],
 
-        showAnswers: false,
-
         streakScore: 0,
         streakIsOver: false,
     },
@@ -30,6 +28,9 @@ new Vue({
         },
         toMove: function() {
             return this.chessJsInstance.turn() === 'w' ? 'white' : 'black'
+        },
+        userMissingChecks: function() {
+            return _.xor(this.validChecks, this.userFoundChecks)
         },
     },
 
@@ -56,7 +57,6 @@ new Vue({
             }
 
             this.userFoundChecks = []
-            this.showAnswers = false
 
             this.setupChessground()
         },
@@ -106,12 +106,6 @@ new Vue({
             } else {
                 this.endStreak()
             }
-        },
-
-        revealAnswers: function() {
-            this.endStreak()
-
-            this.showAnswers = ! this.showAnswers
         },
 
         newStreak: function() {

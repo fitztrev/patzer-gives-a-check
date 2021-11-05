@@ -15,38 +15,28 @@
             <div class="col">
                 <div id="chessground"></div>
 
-                <p class="text-center lead" v-if="chessJsInstance">
+                <p class="text-center lead mt-2" v-if="chessJsInstance">
                     <span class="indicator" :class="toMove"></span>
                     <span class="capitalize">{{ toMove }}</span> to move
-                </h3>
+                </p>
+                <p class="text-center">
+                    <small>
+                        From puzzle <a target="_blank" :href="'https://lichess.org/training/' +  puzzleId">#{{ puzzleId }}</a>
+                    </small>
+                </p>
             </div>
             <div class="col">
                 <template v-if="chessJsInstance">
                     <h4>Find all the checks in this position</h4>
 
                     <ol>
-                        <li v-for="check in userFoundChecks">
+                        <li v-for="check in userFoundChecks" class="text-success">
+                            {{ check.san }}
+                        </li>
+                        <li v-if="streakIsOver" v-for="check in userMissingChecks" class="text-danger fw-bold">
                             {{ check.san }}
                         </li>
                     </ol>
-
-                    <div class="card text-dark bg-light mb-4" v-if="showAnswers">
-                        <div class="card-header">Answers</div>
-                        <div class="card-body">
-                            <p class="card-text">
-                                <ol>
-                                    <li v-for="check in validChecks"
-                                        :class="{
-                                            'text-success': userFoundChecks.includes(check),
-                                            'text-danger fw-bold': !userFoundChecks.includes(check),
-                                        }"
-                                    >
-                                        {{ check.san }}
-                                    </li>
-                                </ol>
-                            </p>
-                        </div>
-                    </div>
 
                     <button v-if="! streakIsOver" type="button" class="btn btn-primary" @click="checkAnswers">Done</button>
 
@@ -64,14 +54,6 @@
                 </template>
             </div>
         </div>
-
-        <hr>
-
-        <p class="text-center text-small">
-            From puzzle <a target="_blank" :href="'https://lichess.org/training/' +  puzzleId">#{{ puzzleId }}</a>
-            &bullet;
-            <a href="#" @click.prevent="revealAnswers">View answers</a>
-        </p>
     </div>
     <script type="module" src="js/app.tsx"></script>
 </body>
