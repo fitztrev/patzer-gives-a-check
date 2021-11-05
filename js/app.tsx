@@ -51,8 +51,11 @@ new Vue({
             // The Lichess puzzle starts after the first move, so play the first move
             this.chessJsInstance.move(puzzle[2].split(' ')[0], { sloppy: true })
 
-            // If this puzzle has no checks, skip it
-            if (_.isEmpty(this.validChecks)) {
+            // If any of the checks are pawn promotions, skip.
+            // Need to implement the promotion dialog first.
+            if (_.some(this.validChecks, function(check) {
+                    return check.san.includes('=')
+                })) {
                 this.loadNewPuzzle()
             }
 
@@ -85,7 +88,7 @@ new Vue({
                             let check = _.find(this.validChecks, {from, to})
 
                             if (check && ! _.includes(this.userFoundChecks, check)) {
-                                this.streakScore++
+                                this.incrementScore()
                                 this.userFoundChecks = _.union(this.userFoundChecks, [check])
                             }
 
@@ -102,9 +105,20 @@ new Vue({
 
         checkAnswers: function() {
             if (this.userFoundChecks.length === this.validChecks.length) {
+                // If there were 0 checks in the puzzle, award a point for getting it right
+                if (this.userFoundChecks.length === 0) {
+                    this.incrementScore()
+                }
+
                 this.loadNewPuzzle()
             } else {
                 this.endStreak()
+            }
+        },
+
+        incrementScore: function() {
+            if (! this.streakIsOver) {
+                this.streakScore++
             }
         },
 

@@ -20,13 +20,12 @@ git subtree push --prefix dist origin gh-pages
 
 ## To-Do
 
-1. Include no-check puzzles. If user correctly presses "Done", give them a point.
-
-1. BUG: Implement pawn promotion dialog
+1. Implement pawn promotion dialog.
     For example, when a pawn promotes and either a queen or rook can check:
     ```
     kr6/p5R1/q1p4p/4Q3/8/P6P/1P2p2P/K7 b - - 3 43
     ```
+    Right now, puzzles with promotion are skipped.
 
 1. Better way to include puzzle data?
     Right now, just the first 5000 puzzles from the Lichess database are included.
