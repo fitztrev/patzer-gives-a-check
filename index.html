@@ -38,7 +38,10 @@
                         </li>
                     </ol>
 
-                    <button v-if="! streakIsOver" type="button" class="btn btn-primary" @click="checkAnswers">Done</button>
+                    <template v-if="! streakIsOver">
+                        <button type="button" class="btn btn-primary" @click="checkAnswers">Done</button>
+                        <small class="text-muted">&ndash; or press Space key</small>
+                    </template>
 
                     <hr>
 
