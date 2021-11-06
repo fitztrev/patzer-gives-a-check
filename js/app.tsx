@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import Vue from 'vue/dist/vue.js'
 import { Chess as ChessJS } from 'chess.js'
-import { Chessground } from 'chessground';
+import { Chessground } from 'chessground'
 
 import puzzles from './puzzles.js'
 
@@ -22,26 +22,29 @@ new Vue({
     },
 
     computed: {
-        validChecks: function() {
-            return this.chessJsInstance.moves({ verbose: true })
-                .filter(move => /\+|\#/.test(move.san))
+        validChecks: function () {
+            return this.chessJsInstance
+                .moves({ verbose: true })
+                .filter((move) => /\+|\#/.test(move.san))
         },
-        toMove: function() {
+        toMove: function () {
             return this.chessJsInstance.turn() === 'w' ? 'white' : 'black'
         },
-        userMissingChecks: function() {
+        userMissingChecks: function () {
             return _.xor(this.validChecks, this.userFoundChecks)
         },
     },
 
-    mounted: function(){
-        this.chessgroundInstance = Chessground(document.getElementById('chessground'))
+    mounted: function () {
+        this.chessgroundInstance = Chessground(
+            document.getElementById('chessground')
+        )
 
         this.newStreak()
     },
 
     methods: {
-        loadNewPuzzle: function() {
+        loadNewPuzzle: function () {
             let puzzle = _.sample(puzzles).split(',')
 
             this.puzzleId = puzzle[0]
@@ -53,9 +56,11 @@ new Vue({
 
             // If any of the checks are pawn promotions, skip.
             // Need to implement the promotion dialog first.
-            if (_.some(this.validChecks, function(check) {
+            if (
+                _.some(this.validChecks, function (check) {
                     return check.san.includes('=')
-                })) {
+                })
+            ) {
                 this.loadNewPuzzle()
             }
 
@@ -64,11 +69,11 @@ new Vue({
             this.setupChessground()
         },
 
-        setupChessground: function() {
+        setupChessground: function () {
             let legalMoves = this.chessJsInstance.moves({ verbose: true })
 
             let moves = new Map()
-            legalMoves.forEach(function(move) {
+            legalMoves.forEach(function (move) {
                 if (!moves.has(move.from)) {
                     moves.set(move.from, [])
                 }
@@ -84,26 +89,32 @@ new Vue({
                     free: false,
                     dests: moves,
                     events: {
-                        after: function(from, to) {
-                            let check = _.find(this.validChecks, {from, to})
+                        after: function (from, to) {
+                            let check = _.find(this.validChecks, { from, to })
 
-                            if (check && ! _.includes(this.userFoundChecks, check)) {
+                            if (
+                                check &&
+                                !_.includes(this.userFoundChecks, check)
+                            ) {
                                 this.incrementScore()
-                                this.userFoundChecks = _.union(this.userFoundChecks, [check])
+                                this.userFoundChecks = _.union(
+                                    this.userFoundChecks,
+                                    [check]
+                                )
                             }
 
-                            if (! check) {
+                            if (!check) {
                                 this.endStreak()
                             }
 
                             this.setupChessground()
-                        }.bind(this)
+                        }.bind(this),
                     },
                 },
             })
         },
 
-        checkAnswers: function() {
+        checkAnswers: function () {
             if (this.userFoundChecks.length === this.validChecks.length) {
                 // If there were 0 checks in the puzzle, award a point for getting it right
                 if (this.userFoundChecks.length === 0) {
@@ -116,19 +127,19 @@ new Vue({
             }
         },
 
-        incrementScore: function() {
-            if (! this.streakIsOver) {
+        incrementScore: function () {
+            if (!this.streakIsOver) {
                 this.streakScore++
             }
         },
 
-        newStreak: function() {
+        newStreak: function () {
             this.streakScore = 0
             this.streakIsOver = false
             this.loadNewPuzzle()
         },
 
-        endStreak: function() {
+        endStreak: function () {
             this.streakIsOver = true
         },
     },

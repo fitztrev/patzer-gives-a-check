@@ -2,6 +2,7 @@
   "name": "patzer-gives-a-check",
   "private": true,
   "scripts": {
+    "format": "prettier --no-semi --single-quote --tab-width=4 --write {js,styles}/**/*",
     "start": "parcel index.html --open",
     "prebuild": "rm -rf dist",
     "build": "parcel build index.html --public-url './'"
@@ -16,6 +17,7 @@
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.0.0",
-    "parcel": "^2.0.0"
+    "parcel": "^2.0.0",
+    "prettier": "^2.4.1"
   }
 }
