@@ -1,9 +1,9 @@
-@import '../node_modules/bootstrap/scss/bootstrap';
-@import '../node_modules/animate.css/animate.css';
+@import 'npm:bootstrap/scss/bootstrap';
+@import 'npm:animate.css/animate.css';
 
-@import '../node_modules/chessground/assets/chessground.base.css';
-@import '../node_modules/chessground/assets/chessground.brown.css';
-@import '../node_modules/chessground/assets/chessground.cburnett.css';
+@import 'npm:chessground/assets/chessground.base.css';
+@import 'npm:chessground/assets/chessground.brown.css';
+@import 'npm:chessground/assets/chessground.cburnett.css';
 
 #chessground {
     width: max(60vh, 40vw);
