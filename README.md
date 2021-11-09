@@ -20,6 +20,9 @@ git subtree push --prefix dist origin gh-pages
 
 ## To-Do
 
+1. Better way to include puzzle data?
+    Right now, just the first 5000 puzzles from the Lichess database are included.
+
 1. Implement pawn promotion dialog.
     For example, when a pawn promotes and either a queen or rook can check:
     ```
@@ -27,8 +30,6 @@ git subtree push --prefix dist origin gh-pages
     ```
     Right now, puzzles with promotion are skipped.
 
-1. Better way to include puzzle data?
-    Right now, just the first 5000 puzzles from the Lichess database are included.
+## Credits
 
-1. Add sound effects?
-    Upon each move or just upon completion of each puzzle? Error sound effect when playing a non-check move?
+Sound effects from [Lichess puzzle storm](https://github.com/ornicar/lila)

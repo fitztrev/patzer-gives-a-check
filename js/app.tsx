@@ -2,8 +2,13 @@ import _ from 'lodash'
 import Vue from 'vue/dist/vue.js'
 import { Chess as ChessJS } from 'chess.js'
 import { Chessground } from 'chessground'
+import { Howl, Howler } from 'howler'
 
 import puzzles from './puzzles.js'
+
+import soundMove from 'url:../sounds/public_sound_standard_Move.mp3'
+import soundSuccess from 'url:../sounds/public_sound_lisp_PuzzleStormGood.mp3'
+import soundError from 'url:../sounds/public_sound_lisp_Error.mp3'
 
 // Have Vue ignore HTML elements from Chessground's svg board
 Vue.config.ignoredElements = [/^cg-/, 'coords', 'piece', 'coord', 'square']
@@ -113,7 +118,9 @@ new Vue({
                                 )
                             }
 
-                            if (!check) {
+                            if (check) {
+                                this.playSound('move')
+                            } else {
                                 this.endStreak()
                             }
 
@@ -131,6 +138,7 @@ new Vue({
                     this.incrementScore()
                 }
 
+                this.playSound('success')
                 this.loadNewPuzzle()
             } else {
                 this.endStreak()
@@ -150,7 +158,22 @@ new Vue({
         },
 
         endStreak: function () {
+            this.playSound('error')
             this.streakIsOver = true
+        },
+
+        playSound: function (sound) {
+            let sounds = {
+                move: [soundMove],
+                success: [soundSuccess],
+                error: [soundError],
+            }
+
+            let howl = new Howl({
+                src: sounds[sound],
+            })
+
+            howl.play()
         },
     },
 })

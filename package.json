@@ -12,6 +12,7 @@
     "bootstrap": "^5.1.3",
     "chess.js": "^0.12.0",
     "chessground": "^8.1.7",
+    "howler": "^2.2.3",
     "lodash": "^4.17.21",
     "vue": "^2.6.14"
   },
