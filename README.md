@@ -1,12 +1,14 @@
-# How Many Checks?
+# Patzer Gives a Check
 
-https://fitztrev.github.io/how-many-checks
+A chess training tool
+
+https://fitztrev.github.io/patzer-gives-a-check
 
 ## Setup
 
 ```bash
-git clone git@github.com:fitztrev/how-many-checks.git
-cd how-many-checks
+git clone git@github.com:fitztrev/patzer-gives-a-check.git
+cd patzer-gives-a-check
 npm install
 npm run start
 ```
