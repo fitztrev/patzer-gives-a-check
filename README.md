@@ -34,4 +34,6 @@ git subtree push --prefix dist origin gh-pages
 
 ## Credits
 
+Puzzles from [Lichess database](https://database.lichess.org/)
+
 Sound effects from [Lichess puzzle storm](https://github.com/ornicar/lila)
