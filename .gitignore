@@ -2,3 +2,5 @@ node_modules
 package-lock.json
 
 .parcel-cache
+
+puzzle-data/lichess_db_puzzle.csv

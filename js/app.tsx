@@ -4,7 +4,7 @@ import { Chess as ChessJS } from 'chess.js'
 import { Chessground } from 'chessground'
 import { Howl, Howler } from 'howler'
 
-import puzzles from './puzzles.js'
+import puzzles from '../puzzle-data/puzzles.json'
 
 import soundMove from 'url:../sounds/public_sound_standard_Move.mp3'
 import soundSuccess from 'url:../sounds/public_sound_lisp_PuzzleStormGood.mp3'
@@ -60,14 +60,14 @@ new Vue({
 
     methods: {
         loadNewPuzzle: function () {
-            let puzzle = _.sample(puzzles).split(',')
+            let puzzle = _.sample(puzzles)
 
             this.puzzleId = puzzle[0]
 
             this.chessJsInstance = new ChessJS(puzzle[1])
 
             // The Lichess puzzle starts after the first move, so play the first move
-            this.chessJsInstance.move(puzzle[2].split(' ')[0], { sloppy: true })
+            this.chessJsInstance.move(puzzle[2], { sloppy: true })
 
             // If any of the checks are pawn promotions, skip.
             // Need to implement the promotion dialog first.

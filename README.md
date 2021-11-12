@@ -13,6 +13,16 @@ npm install
 npm run start
 ```
 
+## Re-generate puzzle data
+
+A random subset of puzzles are taken from the [Lichess database](https://database.lichess.org/).
+
+Download, extract, and place  `lichess_db_puzzle.csv` in `./puzzle-data/`.
+
+```bash
+python3 ./puzzle-data/generate.py
+```
+
 ## Deploy to Github Pages
 
 ```bash
@@ -21,9 +31,6 @@ git subtree push --prefix dist origin gh-pages
 ```
 
 ## To-Do
-
-1. Better way to include puzzle data?
-    Right now, just the first 5000 puzzles from the Lichess database are included.
 
 1. Implement pawn promotion dialog.
     For example, when a pawn promotes and either a queen or rook can check:
