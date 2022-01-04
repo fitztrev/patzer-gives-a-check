@@ -109,7 +109,8 @@ new Vue({
 
                             if (
                                 check &&
-                                !_.includes(this.userFoundChecks, check)
+                                !_.includes(this.userFoundChecks, check) &&
+                                !this.streakIsOver
                             ) {
                                 this.incrementScore()
                                 this.userFoundChecks = _.union(
@@ -146,9 +147,7 @@ new Vue({
         },
 
         incrementScore: function () {
-            if (!this.streakIsOver) {
-                this.streakScore++
-            }
+            this.streakScore++
         },
 
         newStreak: function () {
