@@ -49,9 +49,9 @@ new Vue({
 
         // Register keyboard shortcut for pressing "Done"
         document.addEventListener(
-            'keypress',
+            'keydown',
             function (key) {
-                if (key.code === 'Space' && !this.streakIsOver) {
+                if (key.code === 'Space' && !key.repeat && !this.streakIsOver) {
                     this.checkAnswers()
                 }
             }.bind(this)
