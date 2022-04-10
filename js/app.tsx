@@ -47,7 +47,7 @@ new Vue({
 
         this.newStreak()
 
-        // Register keyboard shortcut for pressing "Done"
+        // Register spacebar keyboard shortcut for pressing "Done"
         document.addEventListener(
             'keydown',
             function (key) {
