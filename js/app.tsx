@@ -67,7 +67,8 @@ new Vue({
             this.chessJsInstance = new ChessJS(puzzle[1])
 
             // The Lichess puzzle starts after the first move, so play the first move
-            this.chessJsInstance.move(puzzle[2], { sloppy: true })
+            const firstMoveOfPuzzle = puzzle[2];
+            this.chessJsInstance.move(firstMoveOfPuzzle, { sloppy: true })
 
             // If any of the checks are pawn promotions, skip.
             // Need to implement the promotion dialog first.
@@ -81,10 +82,10 @@ new Vue({
 
             this.userFoundChecks = []
 
-            this.setupChessground()
+            this.setupChessground(firstMoveOfPuzzle)
         },
 
-        setupChessground: function () {
+        setupChessground: function (firstMoveOfPuzzle) {
             let legalMoves = this.chessJsInstance.moves({ verbose: true })
 
             let moves = new Map()
@@ -96,10 +97,17 @@ new Vue({
                 moves.get(move.from).push(move.to)
             })
 
+            const lastMove = firstMoveOfPuzzle
+                ? [firstMoveOfPuzzle.substring(0, 2), firstMoveOfPuzzle.substring(2)]
+                : [];
+
             this.chessgroundInstance.set({
                 fen: this.chessJsInstance.fen(),
                 orientation: this.toMove,
-                lastMove: [],
+                lastMove: lastMove,
+                highlight: {
+                    lastMove: true
+                },
                 movable: {
                     free: false,
                     dests: moves,
